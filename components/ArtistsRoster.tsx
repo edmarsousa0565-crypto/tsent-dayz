@@ -8,17 +8,22 @@ import data from '@/app/data.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ROTATIONS = [6, -4, 5, -10, 9];
+// Arco simétrico — rotações espelhadas esq/dir
+// [0]NOTTAZ  [1]STANNA  [2]DC  [3]WESS  [4]PRODBYPAKKAZ
+const ROTATIONS = [-5, -2, 5, -10, 10];
+const ZINDEXES  = [23, 25, 23, 21, 21];
 
+// Arco: cantos cortados → meios simétricos (top:23%) → apex (top:3%)
 const DESKTOP_POS: React.CSSProperties[] = [
-  { left: '13%',  top: '22%'   }, // NOTTAZ        — esquerda, mais para dentro
-  { left: '33%',  top: '3%'   }, // STANNA        — centro topo destaque (maior)
-  { right: '9%',  top: '8%'   }, // DC            — direita superior
-  { left: '-5%',  bottom: '-22%' }, // WESS        — canto inf-esq, muito cortado
-  { right: '-4%', bottom: '-18%' }, // PRODBYPAKKAZ — canto inf-dir, muito cortado
+  { left: '16%',  top: '23%'     }, // NOTTAZ — mid-left
+  { left: '35%',  top: '3%'     }, // STANNA — apex, destaque
+  { right: '14%', top: '23%'    }, // DC — mid-right (espelho NOTTAZ)
+  { left: '-4%',  bottom: '-18%' }, // WESS — extremo-esq cortado
+  { right: '-4%', bottom: '-18%' }, // PRODBYPAKKAZ — extremo-dir (espelho WESS)
 ];
 
-const WIDTHS = [188, 245, 165, 218, 208];
+// Pares simétricos: meios=185, cantos=215, apex=250
+const WIDTHS = [185, 250, 185, 215, 215];
 
 export default function ArtistsRoster() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -142,7 +147,7 @@ export default function ArtistsRoster() {
               ...DESKTOP_POS[i],
               width: WIDTHS[i],
               willChange: 'transform',
-              zIndex: 20,
+              zIndex: ZINDEXES[i] ?? 20,
             }}
           >
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-[border-color] duration-300 group-hover:border-brand">
