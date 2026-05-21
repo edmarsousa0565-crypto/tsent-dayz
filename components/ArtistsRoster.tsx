@@ -8,19 +8,17 @@ import data from '@/app/data.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ROTATIONS = [-8, -3, 7, -12, 10];
+const ROTATIONS = [6, -4, 5, -10, 9];
 
-// JoyJam-style: card central (STANNA) destaque no topo,
-// flancos esquerdo/direito, cantos inferiores cortados, texto na base.
 const DESKTOP_POS: React.CSSProperties[] = [
-  { left: '5%',   top: '14%'              }, // NOTTAZ        — esquerda
-  { left: '35%',  top: '1%'              }, // STANNA        — centro topo (destaque)
-  { right: '5%',  top: '7%'              }, // DC            — direita
-  { left: '-3%',  bottom: '-7%'          }, // WESS          — canto inf-esquerdo (cortado)
-  { right: '-2%', bottom: '-5%'          }, // PRODBYPAKKAZ  — canto inf-direito (cortado)
+  { left: '13%',  top: '22%'   }, // NOTTAZ        — esquerda, mais para dentro
+  { left: '33%',  top: '3%'   }, // STANNA        — centro topo destaque (maior)
+  { right: '9%',  top: '8%'   }, // DC            — direita superior
+  { left: '-5%',  bottom: '-22%' }, // WESS        — canto inf-esq, muito cortado
+  { right: '-4%', bottom: '-18%' }, // PRODBYPAKKAZ — canto inf-dir, muito cortado
 ];
 
-const WIDTHS = [185, 240, 180, 215, 205];
+const WIDTHS = [188, 245, 165, 218, 208];
 
 export default function ArtistsRoster() {
   const sectionRef = useRef<HTMLElement>(null);
