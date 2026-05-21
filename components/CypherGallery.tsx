@@ -59,15 +59,15 @@ export default function CypherGallery() {
   );
 
   return (
-    <section ref={sectionRef} className="bg-background">
+    <section ref={sectionRef} className="bg-brand">
 
-      {/* Header — contained */}
-      <div ref={headerRef} className="mx-auto max-w-6xl px-6 pt-24 pb-10">
-        <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-3">
+      {/* Header — centrado */}
+      <div ref={headerRef} className="mx-auto max-w-6xl px-6 pt-24 pb-10 text-center">
+        <p className="text-white/80 text-xs font-bold tracking-widest uppercase mb-3">
           O Cypher · TSENT SYDAZ
         </p>
         <h2
-          className="text-text-main uppercase leading-none"
+          className="text-white uppercase leading-none"
           style={{
             fontFamily: 'var(--font-oswald), sans-serif',
             fontWeight: 700,
