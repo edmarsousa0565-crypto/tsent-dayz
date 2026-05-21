@@ -10,20 +10,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Arco simétrico — rotações espelhadas esq/dir
 // [0]NOTTAZ  [1]STANNA  [2]DC  [3]WESS  [4]PRODBYPAKKAZ
-const ROTATIONS = [-5, -2, 5, -10, 10];
+const ROTATIONS = [-6, 0, 6, -13, 13];
 const ZINDEXES  = [23, 25, 23, 21, 21];
 
-// Arco: cantos cortados → meios simétricos (top:23%) → apex (top:3%)
+// left/top = CENTRO de cada card (via xPercent/yPercent -50 no GSAP).
+// Perfeitamente simétrico em torno de left:50%.
+// Arco apertado: tops 53% → 36% → 27%(apex) → 36% → 53%
 const DESKTOP_POS: React.CSSProperties[] = [
-  { left: '16%',  top: '23%'     }, // NOTTAZ — mid-left
-  { left: '35%',  top: '3%'     }, // STANNA — apex, destaque
-  { right: '14%', top: '23%'    }, // DC — mid-right (espelho NOTTAZ)
-  { left: '-4%',  bottom: '-18%' }, // WESS — extremo-esq cortado
-  { right: '-4%', bottom: '-18%' }, // PRODBYPAKKAZ — extremo-dir (espelho WESS)
+  { left: '30%', top: '36%' }, // NOTTAZ — mid-esquerda
+  { left: '50%', top: '27%' }, // STANNA — apex (centro exato)
+  { left: '70%', top: '36%' }, // DC — mid-direita (espelho NOTTAZ: 100-30)
+  { left: '12%', top: '53%' }, // WESS — extremo-esq, mais baixo
+  { left: '88%', top: '53%' }, // PRODBYPAKKAZ — extremo-dir (espelho WESS: 100-12)
 ];
 
-// Pares simétricos: meios=185, cantos=215, apex=250
-const WIDTHS = [185, 250, 185, 215, 215];
+// Larguras em vw para escalar proporcionalmente; centro ligeiramente maior
+const WIDTHS = ['16vw', '18vw', '16vw', '15vw', '15vw'];
 
 export default function ArtistsRoster() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -31,25 +33,33 @@ export default function ArtistsRoster() {
   useGSAP(
     () => {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) return;
 
       const mm = gsap.matchMedia();
 
-      // Desktop — cards espalhados com rotação e entrada stagger
+      // Desktop — arco simétrico com rotação e entrada stagger
       mm.add('(min-width: 768px)', () => {
         const cards = gsap.utils.toArray<HTMLElement>(
           '[data-artist-desktop]',
           sectionRef.current
         );
 
-        // Aplicar rotação final antes de animar
+        // Centrar cada card no seu ponto (left/top) e aplicar rotação.
+        // Corre sempre — mesmo com reduced-motion — para o arco ficar correto.
         cards.forEach((card, i) => {
-          gsap.set(card, { rotation: ROTATIONS[i] ?? 0, transformOrigin: 'center center' });
+          gsap.set(card, {
+            xPercent: -50,
+            yPercent: -50,
+            rotation: ROTATIONS[i] ?? 0,
+            transformOrigin: 'center center',
+          });
         });
 
-        // Animação de entrada: sobe desde baixo com fade + stagger
+        if (prefersReduced) return;
+
+        // Animação de entrada: sobe desde baixo com fade + stagger.
+        // y (px) é aditivo ao yPercent:-50 da centragem.
         gsap.from(cards, {
-          y: 80,
+          y: 60,
           opacity: 0,
           duration: 1,
           ease: 'power3.out',
@@ -77,6 +87,7 @@ export default function ArtistsRoster() {
 
       // Mobile — fade-in simples
       mm.add('(max-width: 767px)', () => {
+        if (prefersReduced) return;
         const cards = gsap.utils.toArray<HTMLElement>(
           '[data-artist-mobile]',
           sectionRef.current
