@@ -7,16 +7,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Mosaic layout — each item: col-span, row-span, object position */
-const MOSAIC = [
-  { src: '/assets/cypher-29.jpg',  col: 'col-span-2', row: 'row-span-2', pos: 'object-center' },
-  { src: '/assets/cypher-63.jpg',  col: 'col-span-1', row: 'row-span-1', pos: 'object-top'    },
-  { src: '/assets/cypher-119.jpg', col: 'col-span-1', row: 'row-span-1', pos: 'object-top'    },
-  { src: '/assets/cypher-60.jpg',  col: 'col-span-1', row: 'row-span-2', pos: 'object-center' },
-  { src: '/assets/nottaz.jpg',     col: 'col-span-1', row: 'row-span-1', pos: 'object-top'    },
-  { src: '/assets/cypher-30.jpg',  col: 'col-span-2', row: 'row-span-1', pos: 'object-center' },
-  { src: '/assets/cypher-116.jpg', col: 'col-span-1', row: 'row-span-1', pos: 'object-top'    },
+/* Fotos disponíveis — repetidas para preencher o mosaico denso */
+const PHOTOS = [
+  '/assets/cypher-29.jpg',
+  '/assets/cypher-63.jpg',
+  '/assets/cypher-119.jpg',
+  '/assets/cypher-60.jpg',
+  '/assets/nottaz.jpg',
+  '/assets/cypher-30.jpg',
+  '/assets/cypher-116.jpg',
 ];
+
+// Tiles pequenos uniformes. 24 divide certo em 4/6/8 colunas (linhas sempre completas).
+const TILE_COUNT = 24;
+const TILES = Array.from({ length: TILE_COUNT }, (_, i) => ({
+  src: PHOTOS[i % PHOTOS.length],
+  pos: i % 3 === 0 ? 'object-top' : 'object-center',
+}));
 
 export default function CypherGallery() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -79,17 +86,17 @@ export default function CypherGallery() {
         </h2>
       </div>
 
-      {/* Full-width mosaic grid */}
+      {/* Mosaico denso de tiles pequenos */}
       <div
         ref={gridRef}
-        className="grid grid-cols-4 auto-rows-[260px]"
+        className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 auto-rows-[120px] md:auto-rows-[150px]"
         style={{ gap: '3px' }}
       >
-        {MOSAIC.map((tile, i) => (
+        {TILES.map((tile, i) => (
           <div
             key={i}
             data-tile
-            className={`${tile.col} ${tile.row} relative overflow-hidden bg-surface`}
+            className="relative overflow-hidden bg-surface"
             style={{ willChange: 'transform, opacity' }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
