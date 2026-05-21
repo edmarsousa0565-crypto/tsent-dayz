@@ -8,141 +8,221 @@ import data from '@/app/data.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Rotações finais de cada card (aplicadas via GSAP antes da animação de entrada)
+const ROTATIONS = [-9, 6, -5, 11, -8];
+
+// Posições absolutas no desktop (% relativo à section 100vh)
+const DESKTOP_POS: React.CSSProperties[] = [
+  { left: '3%',  top: '7%'                }, // NOTTAZ — topo esquerda
+  { left: '25%', top: '2%'                }, // STANNA — topo centro-esquerda
+  { right: '4%', top: '5%'                }, // DC     — topo direita
+  { left: '2%',  bottom: '7%'             }, // WESS   — base esquerda
+  { right: '3%', bottom: '5%'             }, // PRODBYPAKKAZ — base direita
+];
+
+const WIDTHS = [210, 185, 215, 195, 215];
+
 export default function ArtistsRoster() {
   const sectionRef = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const prefersReduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReduced) return;
 
-      const cards = gridRef.current!.querySelectorAll<HTMLElement>('[data-artist-card]');
+      const mm = gsap.matchMedia();
 
-      gsap.from(cards, {
-        y: 50,
-        opacity: 0,
-        duration: 0.75,
-        ease: 'power3.out',
-        stagger: {
-          each: 0.12,
-          from: 'start',
-        },
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: 'top 82%',
-          toggleActions: 'play none none reverse',
-        },
+      // Desktop — cards espalhados com rotação e entrada stagger
+      mm.add('(min-width: 768px)', () => {
+        const cards = gsap.utils.toArray<HTMLElement>(
+          '[data-artist-desktop]',
+          sectionRef.current
+        );
+
+        // Aplicar rotação final antes de animar
+        cards.forEach((card, i) => {
+          gsap.set(card, { rotation: ROTATIONS[i] ?? 0, transformOrigin: 'center center' });
+        });
+
+        // Animação de entrada: sobe desde baixo com fade + stagger
+        gsap.from(cards, {
+          y: 80,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+
+        // Heading entra a partir do centro
+        gsap.from('[data-roster-heading]', {
+          opacity: 0,
+          scale: 0.85,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+          },
+        });
       });
+
+      // Mobile — fade-in simples
+      mm.add('(max-width: 767px)', () => {
+        const cards = gsap.utils.toArray<HTMLElement>(
+          '[data-artist-mobile]',
+          sectionRef.current
+        );
+        gsap.from(cards, {
+          y: 40,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+
+      return () => mm.revert();
     },
     { scope: sectionRef }
   );
+
+  const artists = data.artists;
 
   return (
     <section
       ref={sectionRef}
       id="artistas"
-      className="bg-background py-24 px-6"
+      className="relative bg-background overflow-hidden"
+      style={{ minHeight: '100vh' }}
     >
-      <div className="mx-auto max-w-6xl">
+      {/* ── Desktop ──────────────────────────────────────────────── */}
+      <div className="hidden md:block relative w-full" style={{ height: '100vh' }}>
 
-        {/* Section header */}
-        <div className="mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-3">
-              TSENT SYDAZ · Label
-            </p>
-            <h2
-              className="font-bold text-text-main leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)' }}
-            >
-              THE ROSTER
-            </h2>
-          </div>
-          <p className="text-text-muted text-sm leading-relaxed max-w-xs sm:text-right">
-            Os talentos que definem o som da nova geração urbana.
+        {/* Heading centrado */}
+        <div
+          data-roster-heading
+          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10"
+        >
+          <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-5">
+            TSENT SYDAZ · Label
+          </p>
+          <h2
+            className="text-text-main uppercase leading-none text-center"
+            style={{
+              fontFamily: 'var(--font-oswald), sans-serif',
+              fontWeight: 700,
+              fontSize: 'clamp(4rem, 10vw, 9rem)',
+              letterSpacing: '-0.03em',
+            }}
+          >
+            THE<br />ROSTER
+          </h2>
+          <p className="text-text-muted text-sm mt-5 text-center leading-relaxed">
+            Os talentos que definem o som<br />da nova geração urbana.
           </p>
         </div>
 
-        {/* Artist grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {data.artists.map((artist) => (
-            <ArtistCard key={artist.id} artist={artist} />
+        {/* Cards espalhados */}
+        {artists.map((artist, i) => (
+          <div
+            key={artist.id}
+            data-artist-desktop
+            className="absolute group"
+            style={{
+              ...DESKTOP_POS[i],
+              width: WIDTHS[i],
+              willChange: 'transform',
+              zIndex: 20,
+            }}
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-[border-color] duration-300 group-hover:border-brand">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={artist.image}
+                alt={artist.name}
+                className="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                style={{ aspectRatio: '3/4' }}
+                onError={(e) => {
+                  const el = e.currentTarget as HTMLImageElement;
+                  el.style.display = 'none';
+                  const p = el.parentElement!;
+                  p.style.background = 'linear-gradient(160deg,#1a0000,#0a0a0a)';
+                  p.style.aspectRatio = '3/4';
+                }}
+              />
+              {/* Badge de género */}
+              <div className="absolute bottom-3 left-3 right-3">
+                <span className="inline-block bg-black/70 backdrop-blur-sm border border-white/10 text-text-muted text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full">
+                  {artist.genre}
+                </span>
+              </div>
+            </div>
+            <p className="mt-2 text-text-main font-bold text-xs uppercase tracking-widest px-1">
+              {artist.name}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Mobile ───────────────────────────────────────────────── */}
+      <div className="md:hidden px-4 pt-16 pb-20">
+        <div className="text-center mb-10">
+          <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-3">
+            TSENT SYDAZ · Label
+          </p>
+          <h2
+            className="text-text-main uppercase leading-none"
+            style={{ fontFamily: 'var(--font-oswald)', fontWeight: 700, fontSize: '3rem' }}
+          >
+            THE ROSTER
+          </h2>
+          <p className="text-text-muted text-sm mt-3">
+            Os talentos da nova geração urbana.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          {artists.map((artist) => (
+            <div key={artist.id} data-artist-mobile>
+              <div className="relative rounded-2xl overflow-hidden border border-white/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={artist.image}
+                  alt={artist.name}
+                  className="w-full object-cover object-top"
+                  style={{ aspectRatio: '3/4' }}
+                  onError={(e) => {
+                    const el = e.currentTarget as HTMLImageElement;
+                    el.style.display = 'none';
+                    const p = el.parentElement!;
+                    p.style.background = 'linear-gradient(160deg,#1a0000,#0a0a0a)';
+                    p.style.aspectRatio = '3/4';
+                  }}
+                />
+                <div className="absolute bottom-2 left-2 right-2">
+                  <span className="inline-block bg-black/70 text-text-muted text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full border border-white/10">
+                    {artist.genre}
+                  </span>
+                </div>
+              </div>
+              <p className="mt-2 text-text-main font-bold text-xs uppercase tracking-widest">
+                {artist.name}
+              </p>
+            </div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-/* ── Artist card ────────────────────────────────────────────────── */
-function ArtistCard({
-  artist,
-}: {
-  artist: (typeof data.artists)[number];
-}) {
-  return (
-    <article
-      data-artist-card
-      className="group relative overflow-hidden rounded-2xl border border-border-subtle bg-surface cursor-pointer"
-      style={{ willChange: 'transform' }}
-    >
-      {/* Image */}
-      <div className="relative h-80 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={artist.image}
-          alt={artist.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          onError={(e) => {
-            const el = e.currentTarget as HTMLImageElement;
-            el.style.display = 'none';
-            const parent = el.parentElement!;
-            parent.style.background =
-              'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)';
-          }}
-        />
-
-        {/* Bottom gradient for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-
-        {/* Artist info — sits over the gradient */}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <h3 className="font-bold text-text-main uppercase tracking-wider leading-tight"
-            style={{ fontSize: 'clamp(1.4rem, 3vw, 1.8rem)' }}
-          >
-            {artist.name}
-          </h3>
-          <p className="mt-1 text-text-muted text-xs font-semibold tracking-widest uppercase">
-            {artist.genre}
-          </p>
-        </div>
-      </div>
-
-      {/* Brand border accent — hidden by default, slides in on hover */}
-      <div
-        className="
-          absolute inset-0 rounded-2xl pointer-events-none
-          border-2 border-brand opacity-0
-          transition-opacity duration-300
-          group-hover:opacity-100
-        "
-      />
-
-      {/* Bottom crimson line — always hinted, glows on hover */}
-      <div
-        className="
-          absolute bottom-0 left-0 right-0 h-px
-          bg-brand opacity-20
-          transition-opacity duration-300
-          group-hover:opacity-100
-        "
-      />
-    </article>
   );
 }
