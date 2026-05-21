@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,6 +29,27 @@ const WIDTHS = ['16vw', '18vw', '16vw', '15vw', '15vw'];
 
 export default function ArtistsRoster() {
   const sectionRef = useRef<HTMLElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Sincroniza o dot ativo com o scroll do carrossel
+  const handleCarouselScroll = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('[data-artist-mobile]');
+    if (!card) return;
+    const step = card.offsetWidth + 16; // largura do card + gap
+    setActiveIndex(Math.round(el.scrollLeft / step));
+  };
+
+  const scrollToCard = (i: number) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('[data-artist-mobile]');
+    if (!card) return;
+    const step = card.offsetWidth + 16;
+    el.scrollTo({ left: i * step, behavior: 'smooth' });
+  };
 
   useGSAP(
     () => {
@@ -190,9 +211,9 @@ export default function ArtistsRoster() {
         ))}
       </div>
 
-      {/* ── Mobile ───────────────────────────────────────────────── */}
-      <div className="md:hidden px-4 pt-16 pb-20">
-        <div className="text-center mb-10">
+      {/* ── Mobile — carrossel horizontal ────────────────────────── */}
+      <div className="md:hidden pt-16 pb-20">
+        <div className="text-center mb-8 px-4">
           <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-3">
             TSENT SYDAZ · Label
           </p>
@@ -207,34 +228,69 @@ export default function ArtistsRoster() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          {artists.map((artist) => (
-            <div key={artist.id} data-artist-mobile>
-              <div className="relative rounded-2xl overflow-hidden border border-white/10">
+        {/* Faixa deslizável com scroll-snap; espreitadela do próximo card */}
+        <div
+          ref={carouselRef}
+          onScroll={handleCarouselScroll}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {artists.map((artist, i) => (
+            <div
+              key={artist.id}
+              data-artist-mobile
+              className="snap-center shrink-0 w-[78%]"
+            >
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={artist.image}
                   alt={artist.name}
                   className="w-full object-cover object-top"
-                  style={{ aspectRatio: '3/4' }}
+                  style={{ aspectRatio: '4/5' }}
                   onError={(e) => {
                     const el = e.currentTarget as HTMLImageElement;
                     el.style.display = 'none';
                     const p = el.parentElement!;
                     p.style.background = 'linear-gradient(160deg,#1a0000,#0a0a0a)';
-                    p.style.aspectRatio = '3/4';
+                    p.style.aspectRatio = '4/5';
                   }}
                 />
-                <div className="absolute bottom-2 left-2 right-2">
-                  <span className="inline-block bg-black/70 text-text-muted text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full border border-white/10">
+                {/* Gradiente + info sobreposta */}
+                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                  <span className="inline-block bg-brand text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full mb-2">
                     {artist.genre}
                   </span>
+                  <p
+                    className="text-white uppercase leading-none"
+                    style={{ fontFamily: 'var(--font-oswald), sans-serif', fontWeight: 700, fontSize: '2rem' }}
+                  >
+                    {artist.name}
+                  </p>
                 </div>
+                {/* Índice grande no topo */}
+                <span
+                  className="absolute top-3 right-4 text-white/30"
+                  style={{ fontFamily: 'var(--font-oswald), sans-serif', fontWeight: 700, fontSize: '2.5rem', lineHeight: 1 }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
               </div>
-              <p className="mt-2 text-text-main font-bold text-xs uppercase tracking-widest">
-                {artist.name}
-              </p>
             </div>
+          ))}
+        </div>
+
+        {/* Dots de progresso */}
+        <div className="flex justify-center gap-2 mt-6">
+          {artists.map((artist, i) => (
+            <button
+              key={artist.id}
+              type="button"
+              aria-label={`Ir para ${artist.name}`}
+              onClick={() => scrollToCard(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === activeIndex ? 'w-6 bg-brand' : 'w-1.5 bg-text-muted/40'
+              }`}
+            />
           ))}
         </div>
       </div>
