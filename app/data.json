@@ -1,0 +1,76 @@
+{
+  "featured": {
+    "badge": "OUT NOW",
+    "title": "Skinny Nigga",
+    "artist": "STANNA",
+    "genre": "Bop House / Trap",
+    "year": "2025",
+    "cover": "/assets/cover.jpg",
+    "youtubeId": "tlzaDAq7j5w",
+    "streaming": [
+      { "platform": "Spotify",       "url": "#" },
+      { "platform": "Apple Music",   "url": "#" },
+      { "platform": "YouTube Music", "url": "#" },
+      { "platform": "Deezer",        "url": "#" }
+    ]
+  },
+  "artists": [
+    { "id": "nottaz",       "name": "NOTTAZ",       "genre": "Rap / Trap",       "image": "/assets/nottaz.jpg"    },
+    { "id": "stanna",       "name": "STANNA",       "genre": "Bop House / Trap", "image": "/assets/cypher-63.jpg" },
+    { "id": "dc",           "name": "DC",           "genre": "Rap / Drill",      "image": "/assets/cypher-29.jpg" },
+    { "id": "wess",         "name": "WESS",         "genre": "Trap / Afro",      "image": "/assets/cypher-60.jpg" },
+    { "id": "prodbypakkaz", "name": "PRODBYPAKKAZ", "genre": "Produção / Beats", "image": "/assets/cypher-30.jpg" }
+  ],
+  "highlightEvent": {
+    "eyebrow": "PRÓXIMO EVENTO",
+    "title": "SENTE A ENERGIA\nAO VIVO.",
+    "date": "28 JUN 2025",
+    "venue": "Music Box · Lisboa",
+    "ticketsUrl": "#",
+    "image": "/assets/event-bg.jpg"
+  },
+  "services": {
+    "primary": [
+      {
+        "id": "playlists",
+        "label": "Catálogo de Playlists",
+        "description": "Todos os sons. Todas as vibrações.",
+        "cta": "Ouvir Agora",
+        "url": "#"
+      },
+      {
+        "id": "demo",
+        "label": "Submeter Demo",
+        "description": "Tens música? Ouvimos tudo. Envia o teu demo.",
+        "cta": "Enviar Agora",
+        "url": "#contactos"
+      }
+    ],
+    "b2b": [
+      { "id": "demo",     "label": "Submeter Demo", "url": "#" },
+      { "id": "bookings", "label": "Bookings",       "url": "#" }
+    ]
+  },
+  "catalogue": {
+    "featured": {
+      "label": "EM DESTAQUE",
+      "title": "Skinny Nigga",
+      "artist": "STANNA",
+      "description": "O novo single que define o som das ruas. Ouça agora em todas as plataformas.",
+      "cover": "/assets/nottaz.jpg",
+      "youtubeId": "tlzaDAq7j5w"
+    },
+    "tracks": [
+      { "id": "1", "title": "Skinny Nigga", "artist": "STANNA",       "duration": "3:24", "cover": "/assets/nottaz.jpg",    "url": "https://youtu.be/tlzaDAq7j5w" },
+      { "id": "2", "title": "Em Breve",     "artist": "NOTTAZ",       "duration": "--:--", "cover": "/assets/nottaz.jpg",   "url": "#" },
+      { "id": "3", "title": "Em Breve",     "artist": "DC",           "duration": "--:--", "cover": "/assets/cypher-29.jpg","url": "#" },
+      { "id": "4", "title": "Em Breve",     "artist": "WESS",         "duration": "--:--", "cover": "/assets/cypher-60.jpg","url": "#" },
+      { "id": "5", "title": "Em Breve",     "artist": "PRODBYPAKKAZ", "duration": "--:--", "cover": "/assets/cypher-30.jpg","url": "#" }
+    ]
+  },
+  "social": [
+    { "platform": "Instagram", "url": "#" },
+    { "platform": "TikTok",    "url": "#" },
+    { "platform": "YouTube",   "url": "#" }
+  ]
+}
