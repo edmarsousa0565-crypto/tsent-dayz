@@ -8,19 +8,19 @@ import data from '@/app/data.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Rotações finais de cada card (aplicadas via GSAP antes da animação de entrada)
-const ROTATIONS = [-9, 6, -5, 11, -8];
+const ROTATIONS = [-8, -3, 7, -12, 10];
 
-// Posições absolutas no desktop (% relativo à section 100vh)
+// JoyJam-style: card central (STANNA) destaque no topo,
+// flancos esquerdo/direito, cantos inferiores cortados, texto na base.
 const DESKTOP_POS: React.CSSProperties[] = [
-  { left: '3%',  top: '7%'                }, // NOTTAZ — topo esquerda
-  { left: '25%', top: '2%'                }, // STANNA — topo centro-esquerda
-  { right: '4%', top: '5%'                }, // DC     — topo direita
-  { left: '2%',  bottom: '7%'             }, // WESS   — base esquerda
-  { right: '3%', bottom: '5%'             }, // PRODBYPAKKAZ — base direita
+  { left: '5%',   top: '14%'              }, // NOTTAZ        — esquerda
+  { left: '35%',  top: '1%'              }, // STANNA        — centro topo (destaque)
+  { right: '5%',  top: '7%'              }, // DC            — direita
+  { left: '-3%',  bottom: '-7%'          }, // WESS          — canto inf-esquerdo (cortado)
+  { right: '-2%', bottom: '-5%'          }, // PRODBYPAKKAZ  — canto inf-direito (cortado)
 ];
 
-const WIDTHS = [210, 185, 215, 195, 215];
+const WIDTHS = [185, 240, 180, 215, 205];
 
 export default function ArtistsRoster() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -109,12 +109,13 @@ export default function ArtistsRoster() {
       {/* ── Desktop ──────────────────────────────────────────────── */}
       <div className="hidden md:block relative w-full" style={{ height: '100vh' }}>
 
-        {/* Heading centrado */}
+        {/* Heading — zona inferior, como no JoyJam */}
         <div
           data-roster-heading
-          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10"
+          className="absolute bottom-0 left-0 right-0 flex flex-col items-center pointer-events-none z-10"
+          style={{ paddingBottom: '6vh' }}
         >
-          <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-5">
+          <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-4">
             TSENT SYDAZ · Label
           </p>
           <h2
@@ -128,7 +129,7 @@ export default function ArtistsRoster() {
           >
             THE<br />ROSTER
           </h2>
-          <p className="text-text-muted text-sm mt-5 text-center leading-relaxed">
+          <p className="text-text-muted text-sm mt-4 text-center leading-relaxed">
             Os talentos que definem o som<br />da nova geração urbana.
           </p>
         </div>
