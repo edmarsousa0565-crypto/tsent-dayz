@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 import data from '@/app/data.json';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -182,6 +183,7 @@ export default function ArtistsRoster() {
               zIndex: ZINDEXES[i] ?? 20,
             }}
           >
+            <Link href={`/artistas/${artist.id}`} className="block">
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-[border-color] duration-300 group-hover:border-brand">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -207,6 +209,7 @@ export default function ArtistsRoster() {
             <p className="mt-2 text-text-main font-bold text-xs uppercase tracking-widest px-1">
               {artist.name}
             </p>
+            </Link>
           </div>
         ))}
       </div>
@@ -240,6 +243,7 @@ export default function ArtistsRoster() {
               data-artist-mobile
               className="snap-center shrink-0 w-[78%]"
             >
+              <Link href={`/artistas/${artist.id}`} className="block">
               <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -275,6 +279,7 @@ export default function ArtistsRoster() {
                   {String(i + 1).padStart(2, '0')}
                 </span>
               </div>
+              </Link>
             </div>
           ))}
         </div>

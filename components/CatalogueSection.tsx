@@ -171,19 +171,23 @@ export default function CatalogueSection() {
 
           <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-none">
             {artists.map((a) => (
-              <div key={a.id} className="flex flex-col items-center gap-3 shrink-0">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-border-subtle hover:border-brand transition-colors duration-300 bg-surface">
+              <Link
+                key={a.id}
+                href={`/artistas/${a.id}`}
+                className="flex flex-col items-center gap-3 shrink-0 group"
+              >
+                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-border-subtle group-hover:border-brand transition-colors duration-300 bg-surface">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={a.image}
                     alt={a.name}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <span className="text-text-muted text-xs font-medium text-center whitespace-nowrap">
+                <span className="text-text-muted text-xs font-medium text-center whitespace-nowrap group-hover:text-text-main transition-colors">
                   {a.name}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -3,9 +3,9 @@
 import Link from 'next/link';
 
 const NAV_LINKS = [
-  { label: 'Artistas', href: '#artistas' },
-  { label: 'Catálogo', href: '#catalogo' },
-  { label: 'Contactos', href: '#contactos' },
+  { label: 'Artistas', href: '/#artistas' },
+  { label: 'Catálogo', href: '/#catalogo' },
+  { label: 'Contactos', href: '/#contactos' },
 ];
 
 export default function Navbar() {
@@ -58,7 +58,7 @@ export default function Navbar() {
 
         {/* CTA — Demo */}
         <Link
-          href="#contactos"
+          href="/#contactos"
           className="
             shrink-0 px-5 py-2 rounded-full
             text-sm font-semibold text-text-main
