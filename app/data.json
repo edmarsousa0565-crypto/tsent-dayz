@@ -16,7 +16,7 @@
   },
   "artists": [
     { "id": "nottaz",       "name": "NOTTAZ",       "genre": "Rap / Trap",       "image": "/assets/nottaz.jpg"    },
-    { "id": "stanna",       "name": "STANNA",       "genre": "Bop House / Trap", "image": "/assets/cypher-63.jpg" },
+    { "id": "stanna",       "name": "STANNA",       "genre": "Bop House / Trap", "image": "/assets/stanna.jpg" },
     { "id": "dc",           "name": "DC",           "genre": "Rap / Drill",      "image": "/assets/cypher-29.jpg" },
     { "id": "wess",         "name": "WESS",         "genre": "Trap / Afro",      "image": "/assets/cypher-60.jpg" },
     { "id": "prodbypakkaz", "name": "PRODBYPAKKAZ", "genre": "Produção / Beats", "image": "/assets/cypher-30.jpg" }
