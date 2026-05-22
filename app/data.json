@@ -5,7 +5,7 @@
     "artist": "STANNA",
     "genre": "Bop House / Trap",
     "year": "2025",
-    "cover": "/assets/cover.jpg",
+    "cover": "/assets/stanna.jpg",
     "youtubeId": "tlzaDAq7j5w",
     "streaming": [
       { "platform": "Spotify",       "url": "#" },
@@ -17,7 +17,7 @@
   "artists": [
     { "id": "nottaz",       "name": "NOTTAZ",       "genre": "Rap / Trap",       "image": "/assets/nottaz.jpg"    },
     { "id": "stanna",       "name": "STANNA",       "genre": "Bop House / Trap", "image": "/assets/stanna.jpg" },
-    { "id": "dc",           "name": "DC",           "genre": "Rap / Drill",      "image": "/assets/cypher-29.jpg" },
+    { "id": "dc",           "name": "DC",           "genre": "Rap / Drill",      "image": "/assets/dc.jpg" },
     { "id": "wess",         "name": "WESS",         "genre": "Trap / Afro",      "image": "/assets/wess.jpg" },
     { "id": "prodbypakkaz", "name": "PRODBYPAKKAZ", "genre": "Produção / Beats", "image": "/assets/cypher-30.jpg" }
   ],
@@ -57,14 +57,14 @@
       "title": "Skinny Nigga",
       "artist": "STANNA",
       "description": "O novo single que define o som das ruas. Ouça agora em todas as plataformas.",
-      "cover": "/assets/nottaz.jpg",
+      "cover": "/assets/stanna.jpg",
       "youtubeId": "tlzaDAq7j5w"
     },
     "tracks": [
-      { "id": "1", "title": "Skinny Nigga", "artist": "STANNA",       "duration": "3:24", "cover": "/assets/nottaz.jpg",    "url": "https://youtu.be/tlzaDAq7j5w" },
+      { "id": "1", "title": "Skinny Nigga", "artist": "STANNA",       "duration": "3:24", "cover": "/assets/stanna.jpg",    "url": "https://youtu.be/tlzaDAq7j5w" },
       { "id": "2", "title": "Em Breve",     "artist": "NOTTAZ",       "duration": "--:--", "cover": "/assets/nottaz.jpg",   "url": "#" },
-      { "id": "3", "title": "Em Breve",     "artist": "DC",           "duration": "--:--", "cover": "/assets/cypher-29.jpg","url": "#" },
-      { "id": "4", "title": "Em Breve",     "artist": "WESS",         "duration": "--:--", "cover": "/assets/cypher-60.jpg","url": "#" },
+      { "id": "3", "title": "Em Breve",     "artist": "DC",           "duration": "--:--", "cover": "/assets/dc.jpg","url": "#" },
+      { "id": "4", "title": "Em Breve",     "artist": "WESS",         "duration": "--:--", "cover": "/assets/wess.jpg","url": "#" },
       { "id": "5", "title": "Em Breve",     "artist": "PRODBYPAKKAZ", "duration": "--:--", "cover": "/assets/cypher-30.jpg","url": "#" }
     ]
   },
