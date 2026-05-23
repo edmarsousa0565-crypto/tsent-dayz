@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden bg-background">
 
       {/* ── Background ──────────────────────────────────────────── */}
       <div className="absolute inset-0">
@@ -51,7 +51,7 @@ export default function Hero() {
 
 
 {/* ── Central content ────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24">
+      <div className="relative z-10 flex flex-col items-center text-center px-6 pt-32 md:pt-24">
 
         {/* Badge */}
         <motion.div
