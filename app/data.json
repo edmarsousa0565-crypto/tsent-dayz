@@ -20,6 +20,7 @@
       "name": "NOTTAZ",
       "genre": "Rap / Trap",
       "image": "/assets/nottaz.jpg",
+      "spotifyArtistId": "",
       "bio": "NOTTAZ traz o peso das ruas em cada barra. Rap cru e trap melódico que definem a nova vaga do som urbano. (texto provisório — edita à vontade)",
       "socials": [
         { "platform": "Instagram", "url": "https://www.instagram.com/nottaz_pleinn/" },
@@ -32,6 +33,7 @@
       "name": "STANNA",
       "genre": "Bop House / Trap",
       "image": "/assets/stanna.jpg",
+      "spotifyArtistId": "1cpTxoTMQGbEDmyU0TEEBC",
       "bio": "STANNA é a energia do bop house com a atitude do trap. Autor do hino 'Skinny Nigga', leva a pista ao rubro. (texto provisório — edita à vontade)",
       "socials": [
         { "platform": "Instagram", "url": "https://www.instagram.com/fcnstanna/" },
@@ -44,6 +46,7 @@
       "name": "DC",
       "genre": "Rap / Drill",
       "image": "/assets/dc.jpg",
+      "spotifyArtistId": "",
       "bio": "DC corta o beat com drill afiado e rap sem filtros. Uma voz que não pede licença. (texto provisório — edita à vontade)",
       "socials": [
         { "platform": "Instagram", "url": "https://www.instagram.com/fckn_dc/" },
@@ -56,6 +59,7 @@
       "name": "WESS",
       "genre": "Trap / Afro",
       "image": "/assets/wess.jpg",
+      "spotifyArtistId": "",
       "bio": "WESS funde trap e afro num som quente e dançável. Melodia e flow que atravessam fronteiras. (texto provisório — edita à vontade)",
       "socials": [
         { "platform": "Instagram", "url": "https://www.instagram.com/wess_majestade/" },
@@ -68,6 +72,7 @@
       "name": "PRODBYPAKKAZ",
       "genre": "Produção / Beats",
       "image": "/assets/cypher-30.jpg",
+      "spotifyArtistId": "",
       "bio": "PRODBYPAKKAZ é o arquiteto por trás do som TSENT SYDAZ. Beats que dão identidade à label. (texto provisório — edita à vontade)",
       "socials": [
         { "platform": "Instagram", "url": "https://www.instagram.com/prodbypakkaz/" },

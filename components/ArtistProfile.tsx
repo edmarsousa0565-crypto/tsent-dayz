@@ -15,6 +15,7 @@ type Artist = {
   image: string;
   bio: string;
   socials: Social[];
+  spotifyArtistId: string;
 };
 type Track = {
   id: string;
@@ -136,6 +137,33 @@ export default function ArtistProfile({
             </div>
           </div>
         </div>
+
+        {/* Player do Spotify */}
+        {artist.spotifyArtistId && (
+          <div data-reveal className="mt-20">
+            <h2
+              className="text-text-main uppercase mb-6"
+              style={{
+                fontFamily: 'var(--font-oswald), sans-serif',
+                fontWeight: 700,
+                fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              Ouve no Spotify
+            </h2>
+            <iframe
+              title={`${artist.name} no Spotify`}
+              src={`https://open.spotify.com/embed/artist/${artist.spotifyArtistId}?utm_source=generator`}
+              width="100%"
+              height={352}
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              allowFullScreen
+              style={{ borderRadius: 12, border: 0 }}
+            />
+          </div>
+        )}
 
         {/* Faixas */}
         <div data-reveal className="mt-20">
