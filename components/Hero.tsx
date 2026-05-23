@@ -42,10 +42,13 @@ export default function Hero() {
           className="absolute inset-0 hidden md:block"
           style={{ background: 'linear-gradient(to bottom, #000 0%, transparent 22%, transparent 72%, #000 100%)' }}
         />
-        {/* Mobile — só fade inferior (mantém os rostos no topo bem visíveis) */}
+        {/* Mobile — gradiente preto: rostos limpos no topo, transição suave para preto */}
         <div
           className="absolute inset-0 md:hidden"
-          style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 45%, rgba(0,0,0,0.85) 100%)' }}
+          style={{
+            background:
+              'linear-gradient(to bottom, transparent 0%, transparent 32%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.92) 62%, #000 75%, #000 100%)',
+          }}
         />
       </div>
 
