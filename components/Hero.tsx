@@ -18,29 +18,34 @@ export default function Hero() {
           className="hidden md:block w-full h-full object-cover object-center"
           style={{ opacity: 0.32 }}
         />
-        {/* Mobile — foto do artista */}
+        {/* Mobile — colagem dos artistas (object-contain mostra todos os rostos) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/hero-mobile.jpg"
           alt=""
           aria-hidden="true"
-          className="md:hidden w-full h-full object-cover object-center"
-          style={{ opacity: 0.9 }}
+          className="md:hidden w-full h-full object-contain object-top"
+          style={{ opacity: 0.95 }}
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).style.display = 'none';
           }}
         />
         {/* Dark veil — mais leve no mobile (foto visível), mais forte no desktop */}
-        <div className="absolute inset-0 bg-black/45 md:bg-black/[0.68]" />
+        <div className="absolute inset-0 bg-black/30 md:bg-black/[0.68]" />
         {/* Left + right edges fade — só no desktop (blend com painéis laterais) */}
         <div
           className="absolute inset-0 hidden md:block"
           style={{ background: 'linear-gradient(to right, #000 0%, transparent 32%, transparent 68%, #000 100%)' }}
         />
-        {/* Top + bottom fade */}
+        {/* Top + bottom fade — desktop */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden md:block"
           style={{ background: 'linear-gradient(to bottom, #000 0%, transparent 22%, transparent 72%, #000 100%)' }}
+        />
+        {/* Mobile — só fade inferior (mantém os rostos no topo bem visíveis) */}
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 45%, rgba(0,0,0,0.85) 100%)' }}
         />
       </div>
 
