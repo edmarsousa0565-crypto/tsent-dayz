@@ -24,7 +24,7 @@ export default function Hero() {
           src="/assets/hero-mobile.jpg"
           alt=""
           aria-hidden="true"
-          className="md:hidden w-full h-full object-contain object-top"
+          className="md:hidden w-full h-full object-cover object-center"
           style={{ opacity: 0.5 }}
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).style.display = 'none';
@@ -58,7 +58,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface px-4 py-1.5 text-xs font-semibold tracking-widest text-text-muted uppercase"
+          className="mb-6 hidden md:inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface px-4 py-1.5 text-xs font-semibold tracking-widest text-text-muted uppercase"
         >
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
           Bop House · Rap · Trap · R&B
@@ -85,7 +85,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.65 }}
-          className="mt-5 max-w-sm text-text-muted text-sm leading-relaxed"
+          className="mt-5 hidden md:block max-w-sm text-text-muted text-sm leading-relaxed"
         >
           A produtora que define o som das ruas.
         </motion.p>
@@ -112,6 +112,7 @@ export default function Hero() {
           <Link
             href="#contactos"
             className="
+              hidden md:block
               w-full sm:w-auto px-7 py-3 rounded-full
               text-sm font-bold tracking-wide text-text-main
               border border-border-subtle
