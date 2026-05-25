@@ -3,7 +3,7 @@
     "badge": "OUT NOW",
     "title": "Skinny Nigga",
     "artist": "STANNA",
-    "genre": "Bop House / Trap",
+    "genre": "Rap / Trap / R&B",
     "year": "2025",
     "cover": "/assets/stanna.jpg",
     "youtubeId": "tlzaDAq7j5w",
@@ -18,7 +18,7 @@
     {
       "id": "nottaz",
       "name": "NOTTAZ",
-      "genre": "Rap / Trap",
+      "genre": "Rap / Trap / R&B",
       "image": "/assets/nottaz.jpg",
       "spotifyArtistId": "",
       "bio": "NOTTAZ traz o peso das ruas em cada barra. Rap cru e trap melódico que definem a nova vaga do som urbano. (texto provisório — edita à vontade)",
@@ -31,7 +31,7 @@
     {
       "id": "stanna",
       "name": "STANNA",
-      "genre": "Bop House / Trap",
+      "genre": "Rap / Trap / R&B",
       "image": "/assets/stanna.jpg",
       "spotifyArtistId": "1cpTxoTMQGbEDmyU0TEEBC",
       "bio": "STANNA é a energia do bop house com a atitude do trap. Autor do hino 'Skinny Nigga', leva a pista ao rubro. (texto provisório — edita à vontade)",
@@ -44,7 +44,7 @@
     {
       "id": "dc",
       "name": "DC",
-      "genre": "Rap / Drill",
+      "genre": "Rap / Trap / R&B",
       "image": "/assets/dc.jpg",
       "spotifyArtistId": "",
       "bio": "DC corta o beat com drill afiado e rap sem filtros. Uma voz que não pede licença. (texto provisório — edita à vontade)",
@@ -57,7 +57,7 @@
     {
       "id": "wess",
       "name": "WESS",
-      "genre": "Trap / Afro",
+      "genre": "Rap / Trap / R&B",
       "image": "/assets/wess.jpg",
       "spotifyArtistId": "",
       "bio": "WESS funde trap e afro num som quente e dançável. Melodia e flow que atravessam fronteiras. (texto provisório — edita à vontade)",

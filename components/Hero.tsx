@@ -61,7 +61,7 @@ export default function Hero() {
           className="mb-6 hidden md:inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface px-4 py-1.5 text-xs font-semibold tracking-widest text-text-muted uppercase"
         >
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-          Bop House · Rap · Trap · R&B
+          Rap · Trap · R&B
         </motion.div>
 
         {/* Label name */}

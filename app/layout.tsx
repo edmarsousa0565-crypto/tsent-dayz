@@ -16,7 +16,7 @@ const oswald = Oswald({
 
 export const metadata: Metadata = {
   title: "TSENT SYDAZ",
-  description: "Bop House. Rap. Trap. R&B. O som que define a rua.",
+  description: "Rap. Trap. R&B. O som que define a rua.",
 };
 
 export default function RootLayout({

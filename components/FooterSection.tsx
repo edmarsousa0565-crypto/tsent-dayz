@@ -225,7 +225,7 @@ export default function FooterSection() {
                 TSENT SYDAZ
               </span>
               <span className="text-text-muted text-xs tracking-widest uppercase">
-                Bop House · Rap · Trap · R&B
+                Rap · Trap · R&B
               </span>
             </div>
 

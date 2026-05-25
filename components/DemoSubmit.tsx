@@ -76,7 +76,7 @@ export default function DemoSubmit() {
 
         {/* Subtitle */}
         <p className="text-text-muted text-base leading-relaxed mb-10 max-w-lg">
-          Estamos sempre à procura de novos talentos. Envia o teu demo — Bop House, Rap, Trap ou R&B. Ouvimos tudo.
+          Estamos sempre à procura de novos talentos. Envia o teu demo — Rap, Trap ou R&B. Ouvimos tudo.
         </p>
 
         {/* Form */}
