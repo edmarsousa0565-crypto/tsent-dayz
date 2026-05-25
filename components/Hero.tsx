@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { Play } from 'lucide-react';
 import data from '@/app/data.json';
 
 export default function Hero() {
@@ -113,6 +114,36 @@ export default function Hero() {
             Submeter Demo
           </Link>
         </motion.div>
+
+        {/* Cartão OUT NOW — só mobile */}
+        <motion.a
+          href="#catalogo"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="md:hidden mt-7 w-full max-w-xs flex items-center gap-3 p-2.5 pr-4 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm transition-colors duration-300 hover:border-brand"
+        >
+          <span className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={data.featured.cover}
+              alt={data.featured.title}
+              className="w-full h-full object-cover object-top"
+            />
+            <span className="absolute inset-0 bg-black/35 flex items-center justify-center">
+              <Play size={18} fill="white" className="text-white" />
+            </span>
+          </span>
+          <span className="flex flex-col items-start min-w-0 text-left">
+            <span className="text-[9px] font-bold tracking-widest uppercase text-brand">
+              {data.featured.badge}
+            </span>
+            <span className="text-sm font-bold text-white truncate w-full leading-tight">
+              {data.featured.title}
+            </span>
+            <span className="text-[11px] text-text-muted">{data.featured.artist}</span>
+          </span>
+        </motion.a>
 
         {/* Tira de artistas — só mobile, empurrada para o fundo */}
         <motion.div
