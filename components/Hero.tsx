@@ -53,17 +53,6 @@ export default function Hero() {
 {/* ── Central content ────────────────────────────────── */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 pt-32 md:pt-24">
 
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-6 hidden md:inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface px-4 py-1.5 text-xs font-semibold tracking-widest text-text-muted uppercase"
-        >
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-          Rap · Trap · R&B
-        </motion.div>
-
         {/* Label name */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
