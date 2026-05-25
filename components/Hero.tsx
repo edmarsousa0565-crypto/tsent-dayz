@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import data from '@/app/data.json';
 
 export default function Hero() {
   return (
@@ -51,7 +52,7 @@ export default function Hero() {
 
 
 {/* ── Central content ────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 pt-32 md:pt-24">
+      <div className="relative z-10 w-full min-h-screen md:min-h-0 flex flex-col items-center text-center px-6 pt-32 md:pt-24 pb-10 md:pb-0">
 
         {/* Label name */}
         <motion.h1
@@ -111,6 +112,44 @@ export default function Hero() {
           >
             Submeter Demo
           </Link>
+        </motion.div>
+
+        {/* Tira de artistas — só mobile, empurrada para o fundo */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="md:hidden mt-auto w-full flex flex-col items-center gap-4"
+        >
+          <span className="text-[10px] text-text-muted uppercase tracking-[0.25em]">
+            Os Artistas
+          </span>
+          <div className="flex items-start justify-center gap-3 w-full">
+            {data.artists.map((a) => (
+              <Link
+                key={a.id}
+                href={`/artistas/${a.id}`}
+                className="group flex flex-col items-center gap-1.5 w-[18%]"
+              >
+                <span className="block w-14 h-14 rounded-full overflow-hidden border border-white/20 group-hover:border-brand transition-colors duration-300">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={a.image}
+                    alt={a.name}
+                    className="w-full h-full object-cover object-top"
+                    onError={(e) => {
+                      const el = e.currentTarget as HTMLImageElement;
+                      el.style.display = 'none';
+                      el.parentElement!.style.background = 'linear-gradient(160deg,#1a0000,#0a0a0a)';
+                    }}
+                  />
+                </span>
+                <span className="text-[8px] leading-tight text-text-muted uppercase tracking-wider text-center truncate w-full">
+                  {a.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </motion.div>
       </div>
 
