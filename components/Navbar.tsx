@@ -23,19 +23,16 @@ export default function Navbar() {
         style={{ WebkitBackdropFilter: 'blur(12px)' }}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
+        <Link href="/" className="flex items-center shrink-0" aria-label="TSENT SYDAZ — início">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo.png"
             alt="TSENT SYDAZ"
-            className="h-7 w-auto"
+            className="h-10 w-auto"
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).style.display = 'none';
             }}
           />
-          <span className="text-text-main font-bold text-base tracking-widest uppercase">
-            TSENT SYDAZ
-          </span>
         </Link>
 
         {/* Nav links — hidden on mobile */}
