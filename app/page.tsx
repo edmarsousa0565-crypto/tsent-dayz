@@ -1,4 +1,5 @@
 import Navbar from "@/components/malibu/Navbar";
+import SmoothScrollProvider from "@/components/malibu/SmoothScrollProvider";
 import Hero from "@/components/malibu/Hero";
 import MarqueeBanner from "@/components/malibu/MarqueeBanner";
 import StorySection from "@/components/malibu/StorySection";
@@ -11,17 +12,25 @@ import Footer from "@/components/malibu/Footer";
 export default function Home() {
   return (
     <>
+      {/*
+        Navbar is OUTSIDE the smooth wrapper.
+        ScrollSmoother applies transforms to #smooth-content, which breaks
+        `position: fixed` on children — keeping Navbar as a sibling avoids this.
+      */}
       <Navbar />
-      <main>
-        <Hero />
-        <MarqueeBanner />
-        <StorySection />
-        <ProductsSection />
-        <LookbookSection />
-        <CountdownSection />
-        <Newsletter />
-      </main>
-      <Footer />
+
+      <SmoothScrollProvider>
+        <main>
+          <Hero />
+          <MarqueeBanner />
+          <StorySection />
+          <ProductsSection />
+          <LookbookSection />
+          <CountdownSection />
+          <Newsletter />
+        </main>
+        <Footer />
+      </SmoothScrollProvider>
     </>
   );
 }

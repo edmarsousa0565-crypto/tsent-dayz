@@ -3,26 +3,31 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(SplitText);
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const chars = gsap.utils.toArray<HTMLElement>(".hero-char", heroRef.current);
+      /* SplitText wraps every char in its own <div> automatically */
+      const split = new SplitText(".hero-title", {
+        type: "chars",
+        charsClass: "split-char",
+      });
 
-      /* Letters slide up */
-      gsap.from(chars, {
+      /* Letters wipe up from below (parent overflow:hidden creates the mask) */
+      gsap.from(split.chars, {
         yPercent: 130,
-        duration: 1.1,
+        duration: 1.15,
         ease: "power4.out",
-        stagger: 0.07,
+        stagger: 0.065,
         delay: 0.15,
       });
 
-      /* Red line sweeps in */
+      /* Red line sweeps left → right */
       gsap.from(".hero-line", {
         scaleX: 0,
         duration: 0.9,
@@ -31,11 +36,11 @@ export default function Hero() {
         transformOrigin: "left center",
       });
 
-      /* Tagline + CTAs */
+      /* Tagline + CTAs fade up */
       gsap.from([".hero-sub", ".hero-cta"], {
         opacity: 0,
         y: 18,
-        duration: 0.7,
+        duration: 0.75,
         ease: "power2.out",
         delay: 1.15,
         stagger: 0.12,
@@ -45,8 +50,11 @@ export default function Hero() {
       gsap.from(".hero-scroll", {
         opacity: 0,
         duration: 0.6,
-        delay: 2.0,
+        delay: 2.1,
       });
+
+      /* Restore original DOM on unmount */
+      return () => split.revert();
     },
     { scope: heroRef }
   );
@@ -68,27 +76,20 @@ export default function Hero() {
       />
 
       <div className="relative z-10 flex flex-col items-center text-center px-4">
-        {/* M A L I B U — letter by letter */}
-        <div
-          className="flex"
-          aria-label="MALIBU"
-          role="heading"
-          aria-level={1}
-        >
-          {"MALIBU".split("").map((char, i) => (
-            <span key={i} className="overflow-hidden inline-block">
-              <span
-                className="hero-char inline-block font-display font-bold text-ink"
-                style={{
-                  fontSize: "clamp(5rem, 18vw, 15rem)",
-                  lineHeight: 0.88,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {char}
-              </span>
-            </span>
-          ))}
+        {/*
+          Single h1 — SplitText splits "MALIBU" into individual char divs.
+          overflow:hidden on this wrapper clips the yPercent animation.
+        */}
+        <div className="overflow-hidden">
+          <h1
+            className="hero-title font-display font-bold text-ink leading-none"
+            style={{
+              fontSize: "clamp(5rem, 18vw, 15rem)",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            MALIBU
+          </h1>
         </div>
 
         {/* Red accent line */}
